@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm
+from .models import CRM
 # Create your views here.
-
+records = CRM.objects.all()
 def home(request):
 
     context = {}
@@ -21,7 +22,8 @@ def home(request):
             messages.error(request, "Invalid credentials , try again or register first")
             return redirect('/')
     else:
-        return render(request, 'home.html')
+        return render(request, 'home.html', {'records': records})
+
 
 
 
@@ -41,6 +43,25 @@ def register_user(request):
             login(request, user)
             return redirect('home')
     else:
-        form=SignUpForm()
-        return render(request, 'register.html',{'form':form})
-    return render(request, 'register.html',{'form':form})
+        form = SignUpForm()
+        return render(request, 'register.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
+
+
+def see_record(request, pk):
+    if request.user.is_authenticated:
+        customer_record = CRM.objects.get(id=pk)
+        return render(request,'record.html',{'record': customer_record})
+
+def delete_record(request, pk):
+    if request.user.is_authenticated:
+
+        del_record = CRM.objects.get(id=pk)
+        del_record.delete()
+
+        recordie = CRM.objects.all()
+        messages.success(request, "record deleted successfully")
+        return render(request,'home.html',{'records': recordie})
+
+
+
