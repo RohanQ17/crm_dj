@@ -1,8 +1,9 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
+from .models import CRM
 class SignUpForm(UserCreationForm):
-	email = forms.EmailField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email Address'}))
+	email = forms.EmailField(label="", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Email Address'}))
 	first_name = forms.CharField(label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'First Name'}))
 	last_name = forms.CharField(label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Last Name'}))
 
@@ -29,3 +30,24 @@ class SignUpForm(UserCreationForm):
 		self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
 		self.fields['password2'].label = ''
 		self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
+
+
+class Addrecordform(forms.ModelForm):
+	name = forms.CharField(label="", max_length=100,widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}))
+	email = forms.EmailField(label="", widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}))
+	address = forms.CharField(label="", max_length=100,widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'ADDRESS'}))
+	city = forms.CharField(label="", max_length=100,widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'city'}))
+	state = forms.CharField(label="", max_length=100,widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'State'}))
+	country = forms.CharField(label="", max_length=100,widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Country'}))
+	phone = forms.CharField(label="", max_length=100,widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}))
+
+	class Meta:
+		model = CRM
+		exclude = ("user",)
+
+
+
+
+
+
+
