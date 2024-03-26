@@ -6,7 +6,7 @@
     <table class="table table-success table-striped">
       <thead class="table-dark">
         <tr>
-            <th scope="col">ID</th>
+            
             <th scope="col">Name</th>
             <th scope="col">Date</th>
             <th scope="col">Email</th>
@@ -15,13 +15,14 @@
             <th scope="col">state</th>
             <th scope="col">country</th>
             <th scope="col">phone</th>
+            <th scope="col">ID</th>
         </tr>
       </thead>
       <tbody>
         {% if records %}
         {% for record in records %}
             <tr>
-                <td> <a href="./record/{{ record.id }}">{{ record.id }} </a></td>
+                
                 <td>  {{ record.name }} </td>
                 <td>{{ record.recorded_at }}</td>
                 <td>{{ record.email }}</td>
@@ -30,6 +31,7 @@
                 <td>{{ record.state }}</td>
                 <td>{{ record.country }}</td>
                 <td>{{ record.phone }}</td>
+                <td> <a href="./record/{{ record.id }}">{{ record.id }} </a></td>
             </tr>
         {% endfor %}
     {% endif %}
