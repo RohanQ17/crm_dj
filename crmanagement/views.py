@@ -49,7 +49,7 @@ def register_user(request):
 def see_record(request, pk):
     if request.user.is_authenticated:
         customer_record = CRM.objects.get(id=pk)
-        return render(request,'record.html',{'record': customer_record})
+        return render(request, 'record.html', {'record': customer_record})
 
 def delete_record(request, pk):
     if request.user.is_authenticated:
@@ -88,7 +88,7 @@ def add_record(request):
                 records = CRM.objects.all()
                 return render(request, 'home.html', {'records': records})
 
-        return render(request, 'add_record.html', {'form':form})
+        return render(request, 'add_record.html', {'form': form})
 
     else:
         messages.error(request, "you must be logged in ")
